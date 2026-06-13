@@ -1,55 +1,55 @@
-# fly.toml - Gobi Replica v2 — Production-Ready Configuration
-app = "gobi-replica"
-primary_region = "iad"
-kill_signal = "SIGTERM"
-kill_timeout = 30
+# fly.toml app configuration file generated for gobi-replica on 2026-06-13T17:46:41Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'gobi-replica'
+primary_region = 'iad'
+kill_signal = 'SIGTERM'
+kill_timeout = '30s'
+
+[build]
 
 [env]
-  NODE_ENV = "production"
-  PORT = "8080"
-  DATA_DIR = "/data"
-  AGENT_NAME = "Patrick"
-  AGENT_ROLE = "Autonomous AI Agent"
-  # LLM Priority: OpenRouter free tier first, then Ollama, then OpenAI fallback
-  LLM_PROVIDERS = "openrouter,ollama,openai"
-  LLM_MODEL = "meta-llama/llama-3.2-3b-instruct:free"
-  OPENROUTER_HTTP_REFERER = "https://github.com/gobi-replica"
-  OPENROUTER_APP_TITLE = "Gobi Replica"
-  # Ollama local (for sidecar setup or local dev)
-  OLLAMA_BASE_URL = "http://localhost:11434/v1"
-  OLLAMA_MODEL = "llama3.2:3b"
-  # Memory
-  MEMORY_MAX_TURNS = "50"
-  MEMORY_SUMMARIZE_AFTER = "20"
-  MEMORY_SEMANTIC_THRESHOLD = "0.7"
-  # SMS disabled by default (enable by setting SMS_ENABLED=true via fly secrets)
-  # SMS_WEBHOOK_PATH = "/api/sms/webhook"
+  AGENT_NAME = 'Patrick'
+  AGENT_ROLE = 'Autonomous AI Agent'
+  DATA_DIR = '/data'
+  LLM_MODEL = 'meta-llama/llama-3.2-3b-instruct:free'
+  LLM_PROVIDERS = 'openrouter,ollama,openai'
+  MEMORY_MAX_TURNS = '50'
+  MEMORY_SEMANTIC_THRESHOLD = '0.7'
+  MEMORY_SUMMARIZE_AFTER = '20'
+  NODE_ENV = 'production'
+  OLLAMA_BASE_URL = 'http://localhost:11434/v1'
+  OLLAMA_MODEL = 'llama3.2:3b'
+  OPENROUTER_APP_TITLE = 'Gobi Replica'
+  OPENROUTER_HTTP_REFERER = 'https://github.com/gobi-replica'
+  PORT = '8080'
 
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = true
+  auto_stop_machines = 'stop'
   auto_start_machines = true
   min_machines_running = 1
-  processes = ["app"]
+  processes = ['app']
 
-  # Concurrency scaling — spawns a second machine when connections exceed soft limit
   [http_service.concurrency]
-    type = "connections"
+    type = 'connections'
     hard_limit = 100
     soft_limit = 50
 
-# ---- Primary Region: IAD (Virginia) ----
 [[vm]]
-  size = "shared-cpu-1x"
-  memory = "512mb"
-  cpu_kind = "shared"
+  size = 'shared-cpu-1x'
+  memory = '512mb'
+  cpu_kind = 'shared'
   cpus = 1
+  memory_mb = 1024
 
-# ---- Secondary Region: LAX (Los Angeles) ----
 [[vm]]
-  size = "shared-cpu-1x"
-  memory = "512mb"
-  cpu_kind = "shared"
+  size = 'shared-cpu-1x'
+  memory = '512mb'
+  cpu_kind = 'shared'
   cpus = 1
-  processes = ["app"]
+  memory_mb = 1024
+  processes = ['app']
