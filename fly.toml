@@ -34,7 +34,7 @@ kill_timeout = 30
   processes = ["app"]
 
   # Concurrency scaling — spawns a second machine when connections exceed soft limit
-  [[http_service.concurrency]]
+  [http_service.concurrency]
     type = "connections"
     hard_limit = 100
     soft_limit = 50
