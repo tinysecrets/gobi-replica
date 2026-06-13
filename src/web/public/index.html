@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Patrick Barnes — Gobi Replica</title>
+<title>Gobi Replica</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
@@ -471,7 +471,7 @@
     <div class="sidebar-brand">
       <div class="brand-avatar">PB</div>
       <div class="brand-info">
-        <div class="brand-name">Patrick Barnes</div>
+        <div class="brand-name">Gobi Replica</div>
         <div class="brand-tagline">Gobi Replica v2</div>
       </div>
     </div>
@@ -533,7 +533,7 @@
           <div class="chat-messages" id="chat-messages">
             <div class="chat-welcome" id="chat-welcome">
               <div class="chat-welcome-icon">⚡</div>
-              <h2>Hey, I'm <span>Patrick</span></h2>
+              <h2>Hey, I'm <span>Gobi</span></h2>
               <p>Your autonomous AI agent. Multi-provider LLM · Semantic memory · SMS gateway · 18 tools. Running on Fly.io free tier with zero proprietary dependencies. How can I help?</p>
               <div class="quick-actions">
                 <div class="quick-chip" onclick="sendQuick('What tools do you have available?')">🔧 Show Tools</div>
@@ -544,7 +544,7 @@
             </div>
           </div>
           <div class="chat-input-area">
-            <textarea class="chat-input" id="chat-input" rows="2" placeholder="Ask Patrick anything…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"></textarea>
+            <textarea class="chat-input" id="chat-input" rows="2" placeholder="Ask me anything…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"></textarea>
             <button class="btn-icon" id="send-btn" onclick="sendMessage()" title="Send">➤</button>
           </div>
         </div>
@@ -778,7 +778,7 @@ function addMessage(role, text) {
   const container = document.getElementById('chat-messages');
   const div = document.createElement('div');
   div.className = `msg-bubble msg-${role}`;
-  const meta = role === 'agent' ? 'Patrick' : 'You';
+  const meta = role === 'agent' ? 'Gobi' : 'You';
   div.innerHTML = `<div class="msg-meta">${meta}</div><div>${escapeHtml(text)}</div>`;
   container.appendChild(div);
   container.scrollTop = container.scrollHeight;
@@ -790,7 +790,7 @@ function addLoadingBubble() {
   const div = document.createElement('div');
   div.className = 'msg-bubble msg-agent';
   div.id = 'loading-bubble';
-  div.innerHTML = '<div class="msg-meta">Patrick</div><div class="msg-loading"><span></span><span></span><span></span></div>';
+  div.innerHTML = '<div class="msg-meta">Gobi</div><div class="msg-loading"><span></span><span></span><span></span></div>';
   container.appendChild(div);
   container.scrollTop = container.scrollHeight;
 }
@@ -873,7 +873,7 @@ function refreshSettings() {
     'cfg-node-env': 'production',
     'cfg-port': '8080',
     'cfg-data-dir': '/data',
-    'cfg-agent-name': 'Patrick',
+    'cfg-agent-name': 'Gobi',
   };
   Object.entries(cfg).forEach(([id, val]) => {
     const el = document.getElementById(id);
@@ -921,7 +921,7 @@ async function init() {
   const online = await checkHealth();
   if (online) {
     refreshStatus();
-    showToast('✅ Connected to Patrick Barnes — All systems go');
+    showToast('✅ Connected to Gobi Replica — All systems go');
   } else {
     showToast('⚠️ Agent is offline — check deployment');
   }

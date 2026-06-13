@@ -11,20 +11,25 @@ kill_timeout = '30s'
 [build]
 
 [env]
-  AGENT_NAME = 'Patrick'
-  AGENT_ROLE = 'Autonomous AI Agent'
-  DATA_DIR = '/data'
-  LLM_MODEL = 'meta-llama/llama-3.2-3b-instruct:free'
-  LLM_PROVIDERS = 'openrouter,ollama,openai'
-  MEMORY_MAX_TURNS = '50'
-  MEMORY_SEMANTIC_THRESHOLD = '0.7'
-  MEMORY_SUMMARIZE_AFTER = '20'
-  NODE_ENV = 'production'
-  OLLAMA_BASE_URL = 'http://localhost:11434/v1'
-  OLLAMA_MODEL = 'llama3.2:3b'
-  OPENROUTER_APP_TITLE = 'Gobi Replica'
-  OPENROUTER_HTTP_REFERER = 'https://github.com/gobi-replica'
-  PORT = '8080'
+  NODE_ENV = "production"
+  PORT = "8080"
+  DATA_DIR = "/data"
+  AGENT_NAME = "Gobi Replica"
+  AGENT_ROLE = "Autonomous AI Agent"
+  # LLM Priority: OpenRouter free tier first, then Ollama, then OpenAI fallback
+  LLM_PROVIDERS = "openrouter,ollama,openai"
+  LLM_MODEL = "meta-llama/llama-3.2-3b-instruct:free"
+  OPENROUTER_HTTP_REFERER = "https://github.com/gobi-replica"
+  OPENROUTER_APP_TITLE = "Gobi Replica"
+  # Ollama local (for sidecar setup or local dev)
+  OLLAMA_BASE_URL = "http://localhost:11434/v1"
+  OLLAMA_MODEL = "llama3.2:3b"
+  # Memory
+  MEMORY_MAX_TURNS = "50"
+  MEMORY_SUMMARIZE_AFTER = "20"
+  MEMORY_SEMANTIC_THRESHOLD = "0.7"
+  # SMS disabled by default (enable by setting SMS_ENABLED=true via fly secrets)
+  # SMS_WEBHOOK_PATH = "/api/sms/webhook"
 
 [http_service]
   internal_port = 8080

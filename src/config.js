@@ -9,7 +9,7 @@ dotenv.config({ path: join(__dirname, '..', '.env') });
 
 const config = {
   // Agent identity
-  agentName: process.env.AGENT_NAME || 'Patrick',
+  agentName: process.env.AGENT_NAME || 'Gobi Replica',
   agentRole: process.env.AGENT_ROLE || 'Autonomous AI Agent',
 
   // ─── Multi-Provider LLM ───────────────────────────────────────────────

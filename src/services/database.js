@@ -92,6 +92,7 @@ class DatabaseService {
   }
 
   exec(sql) { return this.db.exec(sql); }
+  prepare(sql) { return this.db.prepare(sql); }
   get(sql, params = {}) { return this.db.prepare(sql).get(params); }
   close() { if (this.db) this.db.close(); }
 }
