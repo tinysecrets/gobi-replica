@@ -1,0 +1,8 @@
+node_modules/
+.env
+.git
+.gitignore
+data/*.db
+data/exports/
+__pycache__/
+*.log
