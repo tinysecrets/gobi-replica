@@ -16,8 +16,8 @@ import config from '../config.js';
  * This keeps the stack 100 % SQLite + Node.js — zero external vector DB.
  */
 class MemoryService {
-  constructor() {
-    this.db = new DatabaseService();
+  constructor(databaseService) {
+    this.db = databaseService || new DatabaseService();
     this.maxTurns = config.memory.maxConversationTurns;
     this.summarizeAfter = config.memory.summarizeAfterTurns;
     this.semanticThreshold = config.memory.semanticSearchThreshold;
@@ -25,7 +25,10 @@ class MemoryService {
   }
 
   init() {
-    this.db.init();
+    // Only init db if it's not already initialized (was passed in)
+    if (!this.db.db) {
+      this.db.init();
+    }
     this._ensureTables();
     return this;
   }

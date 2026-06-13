@@ -15,7 +15,7 @@ console.log('🗄️  Database initialized');
 const llm = new LLMService();
 console.log('🧠 LLM service ready (multi-provider: openrouter, ollama, openai)');
 
-const memory = new MemoryService().init();
+const memory = new MemoryService(db).init();
 console.log('🧠 Memory service ready (semantic + keyword search)');
 
 const sms = new SMSService();
