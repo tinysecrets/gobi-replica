@@ -1,1 +1,24 @@
-
+# Exported from Render on 2026-07-26T18:33:02Z
+version: "1"
+projects:
+- name: My project
+  environments:
+  - name: Production
+    services:
+    - type: web
+      name: gobi-replica
+      runtime: docker
+      repo: https://github.com/tinysecrets/gobi-replica
+      plan: free
+      envVars:
+      - key: OPENROUTER_BASE_URL
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        sync: false
+      region: virginia
+      dockerContext: .
+      dockerfilePath: ./Dockerfile
+      autoDeployTrigger: commit
+      
