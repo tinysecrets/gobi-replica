@@ -3,7 +3,7 @@ services:
     name: gobi-replica
     env: node # Or 'runtime: docker' if deploying via Dockerfile
     plan: free
-    region: oregon # Specify region (e.g., oregon, frankfurt, singapore)
+    region: Virginia # Specify region (e.g., oregon, frankfurt, singapore)
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: / # Ensures Render monitors your server health before routing traffic
