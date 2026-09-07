@@ -1,1 +1,22 @@
-{"$schema":"https://schema.railpack.com","provider":"node","deploy":{"aptPackages":["python3","python3-venv","bash","curl","jq","git","ripgrep","sqlite3"],"variables":{"NODE_ENV":"production","TZ":"UTC","LANG":"en_US.UTF-8"}}}
+{
+  "$schema": "https://schema.railpack.com",
+  "provider": "node",
+  "deploy": {
+    "aptPackages": [
+      "...",
+      "python3",
+      "python3-venv",
+      "bash",
+      "curl",
+      "jq",
+      "git",
+      "ripgrep",
+      "sqlite3"
+    ],
+    "variables": {
+      "NODE_ENV": "production",
+      "TZ": "UTC",
+      "LANG": "en_US.UTF-8"
+    }
+  }
+}
