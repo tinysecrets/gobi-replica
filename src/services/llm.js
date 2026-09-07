@@ -124,20 +124,25 @@ class LLMService {
     // ─── Graceful Degradation ──────────────────────────────────────────
     // Instead of throwing (which crashes the UI), return a friendly
     // response that tells the user what's needed.
-    const missingKeys = [];
-    if (!config.llm.openrouter.apiKey) missingKeys.push('OpenRouter');
-    if (!config.llm.openai.apiKey) missingKeys.push('OpenAI');
-    const ollamaErr = errors.find(e => e.startsWith('ollama:'));
-    if (!missingKeys.length && ollamaErr) missingKeys.push('Ollama (local)');
+    const configured = [];
+    const missing = [];
+    if (config.llm.openrouter.apiKey) configured.push("OpenRouter"); else missing.push("OpenRouter");
+    if (config.llm.openai.apiKey) configured.push("OpenAI"); else missing.push("OpenAI");
+    if (config.llm.ollama.enabled) configured.push("Ollama"); else missing.push("Ollama");
 
-    let helpfulMessage;
-    if (missingKeys.length > 0) {
-      helpfulMessage = `**🔑 API Key Required**\n\nTo use Gobi Replica's AI features, you need to configure an API key.\n\n**Missing keys:** ${missingKeys.join(', ')}\n\n**Quick setup:**\n1. Get a free API key from [OpenRouter](https://openrouter.ai/keys)\n2. Deploy with: \`fly secrets set OPENROUTER_API_KEY=sk-or-...\`\n3. Redeploy and you're all set!\n\n*The app is running — just needs AI provider credentials to start thinking.*`;
-    } else {
-      helpfulMessage = `**⚠️ AI Provider Unavailable**\n\nAll configured LLM providers failed to respond. Details:\n${errors.map(e => `  • ${e}`).join('\n')}\n\nPlease check your API keys and provider status, then redeploy.`;
-    }
+    const details = errors.length ? errors.map(e => `  • ${e}`).join("\n") : "  • No provider error was returned.";
 
-    return { content: helpfulMessage, role: 'assistant' };
+    const helpfulMessage = `**🧠 AI Provider Unavailable**
+
+Configured providers: ${configured.length ? configured.join(", ") : "none"}
+Missing configuration: ${missing.length ? missing.join(", ") : "none"}
+
+**Actual provider errors:**
+${details}
+
+Gobi is running. This is an LLM provider failure, not proof that an API key is missing. No Fly.io deployment is required.`;
+
+    return { content: helpfulMessage, role: "assistant" };
   }
 
   /**
