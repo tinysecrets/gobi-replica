@@ -1,7 +1,7 @@
 {
   "name": "gobi-replica",
   "version": "2.0.0",
-  "description": "Local-first autonomous AI agent runtime with tools, persistent memory, scheduling, and multi-provider LLM support",
+  "description": "Gobi Replica — a local-first autonomous AI agent with tools, persistent memory, scheduling, messaging, and multi-provider LLM support.",
   "type": "module",
   "main": "src/index.js",
   "scripts": {
@@ -13,19 +13,17 @@
     "autonomous-agent",
     "llm",
     "ollama",
-    "openrouter",
-    "openai",
-    "agent-runtime",
-    "local-first",
+    "automation",
+    "memory",
     "sqlite",
-    "automation"
+    "nodejs"
   ],
   "dependencies": {
-    "express": "^4.21.0",
     "better-sqlite3": "^11.6.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.16",
-    "dotenv": "^16.4.5",
     "uuid": "^10.0.0"
   },
   "engines": {
