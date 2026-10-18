@@ -11,10 +11,15 @@ test('UUID provider generates valid v4 identifiers', () => {
   assert.match(id, /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i);
 });
 
-test('Node Cron accepts supported expressions without starting a task', () => {
+test('Node Cron supports the scheduler add/stop API without running a callback', () => {
   assert.equal(cron.validate('*/5 * * * *'), true);
   assert.equal(cron.validate('not-a-cron-expression'), false);
   assert.equal(typeof cron.schedule, 'function');
+  const task = cron.schedule('*/5 * * * *', () => {
+    assert.fail('the offline scheduler smoke test must not run a callback');
+  });
+  assert.equal(typeof task.stop, 'function');
+  task.stop();
 });
 
 test('Nodemailer normalizes mail through JSON transport without network I/O', async () => {
